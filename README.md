@@ -1,4 +1,4 @@
-# TrailBlazer
+# Corona Statics App
 
 Run below command for setup
 
