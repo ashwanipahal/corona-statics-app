@@ -21,6 +21,7 @@ type item = {
 
 const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
     React.useEffect(() => {
+        // Making call on initial render because we want real time data
         getListData()
         return () => null;
     }, [])

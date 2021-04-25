@@ -5,7 +5,7 @@ import { fetchData } from '../../../services/DetailPage'
 function* fetchDetailData(action) {
    try {
       let data = yield call(fetchData, action.payload);
-      yield put({type: DETAIL_PAGE_CONSTANTS.SET_DETAIL_PAGE_DATA, payload: data});
+      yield put({type: DETAIL_PAGE_CONSTANTS.SET_DETAIL_PAGE_DATA, payload: data.reverse()}); // we used reverse array function to latest date on top
       yield put({type: DETAIL_PAGE_CONSTANTS.SET_SELECTED_COUNTRY, payload: action.payload});
    } catch (e) {
       console.log('error occurred',e);

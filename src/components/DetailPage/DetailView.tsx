@@ -12,8 +12,6 @@ type DetailProps = {
     countryData: Array<any>;
 }
 
-
-
 type item = {
     Date: string;
     Confirmed: number;
@@ -26,7 +24,7 @@ function useQuery() {
 }
 
 const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: DetailProps) => {
-    countryListData = countryListData.reverse();
+    
     let query = useQuery();
     let data = query.get('query');
     React.useEffect(() => {
