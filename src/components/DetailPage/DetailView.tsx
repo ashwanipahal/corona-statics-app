@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
-import { TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
+import { createBrowserHistory } from 'history';
+import { Button, TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
 import CoronaHeadLines from '../common/CoronaHeadlines/CoronaHeadlines'
+import { convertDate } from '../../utility/common'
 import "./style.scss";
 
 type DetailProps = {
@@ -31,9 +33,14 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
         getDetailData(data)
         return () => null;
     }, [data])
-
+    let history = createBrowserHistory();
+    const backToHomePage = () => {
+        if (window.location.pathname !== '/') {
+            history.goBack();
+        }
+    }
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -43,9 +50,17 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
     return (<div className="list-view">
-        <CoronaHeadLines staticsData={countryData[0] || {}}/>
-        <h3> This Table shows every day data for the {data}.</h3>
+
+        <Button className="back-button" onClick={backToHomePage} variant="contained" color="primary">
+            {`< Back`}
+        </Button>
+        <div className="table-heading">{data}</div>
+
+
+        <CoronaHeadLines staticsData={countryData[0] || {}} />
+        <h3>This Table shows total corona cases date wise for the {data}.</h3>
         <TableContainer className="container" component={Paper}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -63,7 +78,7 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
                         return (
                             <TableRow className="table-row" hover key={row.Date}>
                                 <TableCell component="th" scope="row">
-                                    {row.Date}
+                                    {convertDate(row.Date)}
                                 </TableCell>
 
                                 <TableCell align="right">{row.Confirmed}</TableCell>
