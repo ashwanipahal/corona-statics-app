@@ -7,10 +7,12 @@ module.exports = merge(common, {
     mode: 'development',
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "public")
+        path: path.resolve(__dirname, "public"),
+        publicPath: '/'
       },
     devtool: 'inline-source-map',
     devServer: {
+        historyApiFallback: true,
         contentBase: path.join(__dirname, 'public'),
     }
 })

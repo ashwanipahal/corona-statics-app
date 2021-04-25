@@ -1,8 +1,11 @@
-export const LIST_PAGE_REDUCER_KEY = 'ListPage';
-export const LIST_PAGE_ACTION_PATTERN = '@@HomePage-';
+export const DETAIL_PAGE_REDUCER_KEY = 'DetailPage';
+export const DETAIL_PAGE_ACTION_PATTERN = '@@DetailPage-';
 
+export const LIST_PAGE_REDUCER_KEY = 'ListPage';
+export const LIST_PAGE_ACTION_PATTERN = '@@ListPage-';
 
 
 export const REDUCER_ACTION_MAPPING = {
-  [LIST_PAGE_REDUCER_KEY]: LIST_PAGE_ACTION_PATTERN
+  [LIST_PAGE_REDUCER_KEY]: LIST_PAGE_ACTION_PATTERN,
+  [DETAIL_PAGE_REDUCER_KEY]: DETAIL_PAGE_ACTION_PATTERN
 };

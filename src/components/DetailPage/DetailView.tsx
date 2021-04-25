@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
 
 import "./style.scss";
 
-type ListProps = {
-    getListData: () => any;
-    listData: Array<Object>;
-    globalData: globalDataObject;
+type DetailProps = {
+    getDetailData: (arg0: string) => any;
+    countryListData: Array<Object>;
+    countryData: Array<globalDataObject>;
 }
 
 type globalDataObject = {
@@ -17,21 +17,27 @@ type globalDataObject = {
 }
 
 type item = {
-    Country: string;
-    ID: string;
-    TotalConfirmed: number;
-    TotalDeaths: number;
-    TotalRecovered: number;
+    Date: string;
+    Confirmed: number;
+    Deaths: number;
+    Recovered: number;
 }
 
-const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: DetailProps) => {
+    countryListData = countryListData.reverse();
+    let query = useQuery();
+    let data = query.get('query');
     React.useEffect(() => {
-        getListData()
+        getDetailData(data)
         return () => null;
-    }, [])
-    let history = useHistory();
+    }, [data])
+
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
+    const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -41,54 +47,53 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    const countryClickHandler = (country:string) => {
-        history.push({pathname: '/detail',search: `?query=${country}`});
-    }
-
     return (<div className="list-view">
         <div className="global-counter">
             <div className="global-counter__main-counter-wrap">
                 <h1>Coronavirus Cases:</h1>
                 <div className="global-counter__main-counter-number">
-                    <span className="global-counter__total-cases">{globalData.TotalConfirmed}</span>
+                    <span className="global-counter__total-cases">{countryData[0] && countryData[0].TotalConfirmed}</span>
 
                 </div>
             </div>
             <div className="global-counter__main-counter-wrap">
                 <h1>Deaths:</h1>
-                <div  className="global-counter__main-counter-number">
-                    <span>{globalData.TotalDeaths}</span>
+                <div className="global-counter__main-counter-number">
+
+                    <span>{countryData[0] && countryData[0].TotalDeaths}</span>
                 </div>
             </div>
             <div className="global-counter__main-counter-wrap">
                 <h1>Recovered:</h1>
                 <div className="global-counter__main-counter-number recovered">
-                    <span>{globalData.TotalRecovered}</span>
+                    <span>{countryData[0] && countryData[0].TotalRecovered}</span>
                 </div>
             </div>
         </div>
+        <h3> This Table shows every day data for the {data}.</h3>
         <TableContainer className="container" component={Paper}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Country</TableCell>
-                        <TableCell align="right">Total Confirmed</TableCell>
-                        <TableCell align="right">Total Deaths</TableCell>
-                        <TableCell align="right">Total Recovered</TableCell>
+
+                        <TableCell>Date</TableCell>
+                        <TableCell align="right">Confirmed</TableCell>
+                        <TableCell align="right">Deaths</TableCell>
+                        <TableCell align="right">Recovered</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
 
-                    {listData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: item) => {
+                    {countryListData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: item) => {
                         return (
-                            <TableRow onClick={()=>countryClickHandler(row.Country)} className="table-row" hover key={row.ID}>
+                            <TableRow className="table-row" hover key={row.Date}>
                                 <TableCell component="th" scope="row">
-                                    {row.Country}
+                                    {row.Date}
                                 </TableCell>
-                                <TableCell align="right">{row.TotalConfirmed}</TableCell>
-                                <TableCell align="right">{row.TotalDeaths}</TableCell>
-                                <TableCell align="right">{row.TotalRecovered}</TableCell>
+
+                                <TableCell align="right">{row.Confirmed}</TableCell>
+                                <TableCell align="right">{row.Deaths}</TableCell>
+                                <TableCell align="right">{row.Recovered}</TableCell>
 
                             </TableRow>
                         )
@@ -99,7 +104,7 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
         </TableContainer>
         <TablePagination
             component="div"
-            count={listData.length || 0}
+            count={countryListData.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
@@ -108,4 +113,4 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
     </div >);
 }
 
-export default ListView;
+export default DetailView;
