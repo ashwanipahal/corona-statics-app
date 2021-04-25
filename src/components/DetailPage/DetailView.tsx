@@ -1,20 +1,16 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
-
+import CoronaHeadLines from '../common/CoronaHeadlines/CoronaHeadlines'
 import "./style.scss";
 
 type DetailProps = {
     getDetailData: (arg0: string) => any;
     countryListData: Array<Object>;
-    countryData: Array<globalDataObject>;
+    countryData: Array<any>;
 }
 
-type globalDataObject = {
-    TotalConfirmed: number;
-    TotalDeaths: number;
-    TotalRecovered: number;
-}
+
 
 type item = {
     Date: string;
@@ -48,28 +44,7 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
         setPage(0);
     };
     return (<div className="list-view">
-        <div className="global-counter">
-            <div className="global-counter__main-counter-wrap">
-                <h1>Coronavirus Cases:</h1>
-                <div className="global-counter__main-counter-number">
-                    <span className="global-counter__total-cases">{countryData[0] && countryData[0].TotalConfirmed}</span>
-
-                </div>
-            </div>
-            <div className="global-counter__main-counter-wrap">
-                <h1>Deaths:</h1>
-                <div className="global-counter__main-counter-number">
-
-                    <span>{countryData[0] && countryData[0].TotalDeaths}</span>
-                </div>
-            </div>
-            <div className="global-counter__main-counter-wrap">
-                <h1>Recovered:</h1>
-                <div className="global-counter__main-counter-number recovered">
-                    <span>{countryData[0] && countryData[0].TotalRecovered}</span>
-                </div>
-            </div>
-        </div>
+        <CoronaHeadLines staticsData={countryData[0] || {}}/>
         <h3> This Table shows every day data for the {data}.</h3>
         <TableContainer className="container" component={Paper}>
             <Table stickyHeader aria-label="sticky table">

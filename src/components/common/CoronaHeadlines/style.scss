@@ -1,0 +1,24 @@
+.global-counter {
+    text-align: center;
+    &__main-counter-wrap {
+      margin-top: 15px;
+      h2 {
+        font-weight: 300;
+        font-size: 40px;
+        color: #555;
+        margin: 0;
+      }
+    }
+    &__main-counter-number {
+      font-weight: 700;
+      color: #696969;
+      font-size: 54px;
+      &.recovered {
+        color: #8aca2b;
+        margin-bottom: 15px;
+      }
+    }
+    &__total-cases {
+      color: #aaa;
+    }
+  }

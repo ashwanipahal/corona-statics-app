@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
-
+import CoronaHeadLines from '../common/CoronaHeadlines/CoronaHeadlines';
 import "./style.scss";
+import type { globalDataObject } from '../common/CoronaHeadlines/CoronaHeadlines'
 
 type ListProps = {
     getListData: () => any;
     listData: Array<Object>;
     globalData: globalDataObject;
-}
-
-type globalDataObject = {
-    TotalConfirmed: number;
-    TotalDeaths: number;
-    TotalRecovered: number;
 }
 
 type item = {
@@ -42,32 +37,12 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
         setPage(0);
     };
 
-    const countryClickHandler = (country:string) => {
-        history.push({pathname: '/detail',search: `?query=${country}`});
+    const countryClickHandler = (country: string) => {
+        history.push({ pathname: '/detail', search: `?query=${country}` });
     }
 
     return (<div className="list-view">
-        <div className="global-counter">
-            <div className="global-counter__main-counter-wrap">
-                <h1>Coronavirus Cases:</h1>
-                <div className="global-counter__main-counter-number">
-                    <span className="global-counter__total-cases">{globalData.TotalConfirmed}</span>
-
-                </div>
-            </div>
-            <div className="global-counter__main-counter-wrap">
-                <h1>Deaths:</h1>
-                <div  className="global-counter__main-counter-number">
-                    <span>{globalData.TotalDeaths}</span>
-                </div>
-            </div>
-            <div className="global-counter__main-counter-wrap">
-                <h1>Recovered:</h1>
-                <div className="global-counter__main-counter-number recovered">
-                    <span>{globalData.TotalRecovered}</span>
-                </div>
-            </div>
-        </div>
+        <CoronaHeadLines staticsData={globalData} />
         <TableContainer className="container" component={Paper}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -82,7 +57,7 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
 
                     {listData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: item) => {
                         return (
-                            <TableRow onClick={()=>countryClickHandler(row.Country)} className="table-row" hover key={row.ID}>
+                            <TableRow onClick={() => countryClickHandler(row.Country)} className="table-row" hover key={row.ID}>
                                 <TableCell component="th" scope="row">
                                     {row.Country}
                                 </TableCell>
