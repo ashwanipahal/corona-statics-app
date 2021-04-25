@@ -1,4 +1,4 @@
-export function fetchData() {
+export function fetchListDataApi() {
   return fetch(`https://api.covid19api.com/summary`)
   .then((response) => {
     return response.json();
