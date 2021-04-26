@@ -6,6 +6,7 @@ import globalReducers from '../reducers';
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
 
+// Choose compose method depending upon environment and platform
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // mount it on the Store

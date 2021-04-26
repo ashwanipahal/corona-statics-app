@@ -2,8 +2,8 @@ import LIST_PAGE_CONSTANTS from './ListPage.constants';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
-  list: [],
-  globalData: {},
+  list: [], // this array would be used to show show all countries
+  globalData: {}, // this object is used to show global corona cases
 });
 
 const ListPageReducer = (state = initialState, action) => {

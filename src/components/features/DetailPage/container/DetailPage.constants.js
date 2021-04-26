@@ -1,4 +1,4 @@
-import { DETAIL_PAGE_ACTION_PATTERN } from '../../../constants/reducer.constants';
+import { DETAIL_PAGE_ACTION_PATTERN } from '../../../../constants/reducer.constants';
 
 export default {
   GET_DETAIL_PAGE_DATA: `${DETAIL_PAGE_ACTION_PATTERN}GET_DETAIL_PAGE_DATA`,

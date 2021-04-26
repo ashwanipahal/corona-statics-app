@@ -6,7 +6,7 @@ import DetailPage from '../DetailView';
 
 const mapStateToProps = state => {
   return {
-    countryListData: countryListData(state),
+    countryListData: countryListData(state), 
     countryData: countryData(state),
   };  
 };
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
       getDetailData: (payload) => {
-        dispatch(getDetailDataAction(payload));
+        dispatch(getDetailDataAction(payload)); // action dispatch
       }
     };
   };

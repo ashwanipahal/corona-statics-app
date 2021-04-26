@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const path = require('path');
 
+// this configuration is for just local webpack server
 
 module.exports = merge(common, {
     mode: 'development',

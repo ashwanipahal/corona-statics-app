@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
-import CoronaHeadLines from '../common/CoronaHeadlines/CoronaHeadlines';
+import CoronaHeadLines from '../../common/CoronaHeadlines/CoronaHeadlines';
 import "./style.scss";
-import type { globalDataObject } from '../common/CoronaHeadlines/CoronaHeadlines'
+import type { globalDataObject } from '../../common/CoronaHeadlines/CoronaHeadlines'
 
 type ListProps = {
     getListData: () => any;
@@ -20,24 +20,38 @@ type item = {
 }
 
 const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
+
     React.useEffect(() => {
-        // Making call on initial render because we want real time data
+        // Making call every time because we want real time data
         getListData()
         return () => null;
     }, [])
+
     let history = useHistory();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
+    /**
+     * Returns type undefined
+     * @param {object,number} event Input htmlEvent newPage
+     */
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
+    /**
+     * Returns type undefined
+     * @param {object} event Input html event
+     */
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
 
+    /**
+     * Returns type undefined
+     * @param {string} country Input string
+     */
     const countryClickHandler = (country: string) => {
         history.push({ pathname: '/detail', search: `?query=${country}` });
     }

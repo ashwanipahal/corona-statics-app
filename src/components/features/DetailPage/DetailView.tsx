@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Button, TableContainer, Table, Paper, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@material-ui/core'
-import CoronaHeadLines from '../common/CoronaHeadlines/CoronaHeadlines'
-import { convertDate } from '../../utility/common'
+import CoronaHeadLines from '../../common/CoronaHeadlines/CoronaHeadlines'
+import { convertDate } from '../../../utility/common'
 import "./style.scss";
 
 type DetailProps = {
@@ -40,10 +40,18 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
+    /**
+     * Returns type undefined
+     * @param {object,number} event Input htmlEvent newPage
+     */
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
+    /**
+     * Returns type undefined
+     * @param {object} event Input html event
+     */
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
@@ -52,7 +60,7 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
     return (<div className="list-view">
 
         <Button className="back-button" onClick={backToHomePage} variant="contained" color="primary">
-            {`< Back`}
+            {`Back`}
         </Button>
         <div className="table-heading">{data}</div>
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Loading from '../common/Loading/Loading';
+import Loading from '../../common/Loading/Loading';
 import './style.scss';
 
 const LazyCoronaListView = React.lazy(() => import('../CoronaListView'));

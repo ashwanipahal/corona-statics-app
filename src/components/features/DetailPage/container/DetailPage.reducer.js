@@ -2,8 +2,8 @@ import DETAIL_PAGE_CONSTANTS from './DetailPage.constants';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
-  countryDetailList: [],
-  selectedCountry: '',
+  countryDetailList: [], // to store detail page country data
+  selectedCountry: '', // tp selected country
 });
 
 const DetailPageReducer = (state = initialState, action) => {

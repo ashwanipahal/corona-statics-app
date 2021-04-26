@@ -38,5 +38,5 @@ const CoronaHeadLines = (props: headLinesProps) => {
     )
 }
 
-export type { globalDataObject };
+export type { globalDataObject }; // exported types  
 export default CoronaHeadLines;
