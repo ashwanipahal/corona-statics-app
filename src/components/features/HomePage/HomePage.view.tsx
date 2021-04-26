@@ -1,20 +1,27 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Loading from '../../common/Loading/Loading';
+import LazyCoronaListView from '../CoronaListView';
+import LazyDetailView from '../DetailPage';
 import './style.scss';
 
-const LazyCoronaListView = React.lazy(() => import('../CoronaListView'));
-const LazyDetailView = React.lazy(() => import('../DetailPage'));
+// const LazyCoronaListView = React.lazy(() => import('../CoronaListView'));
+// const LazyDetailView = React.lazy(() => import('../DetailPage'));
 
 const Home = () => {
   return (
     <Router>
       <Switch>
         {/* Dynamic import of component at route level */}
-        <React.Suspense fallback={<Loading />}>
-          <Route exact path='/' component={LazyCoronaListView} />
-          <Route path='/detail' component={LazyDetailView} />
-        </React.Suspense>
+        {/* <React.Suspense fallback={<Loading />}> */}
+
+        <Route path='/detail'>
+          <LazyDetailView />
+        </Route>
+        <Route path='/'>
+          <LazyCoronaListView />
+        </Route>
+        {/* </React.Suspense> */}
       </Switch>
     </Router>
   );
