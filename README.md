@@ -12,7 +12,7 @@ React
 
 Redux
 
-React Router
+React Router ( used HashRouter for app deployment on github )
 
 Redux Saga
 

@@ -52,7 +52,7 @@ const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
      * @param {string} country Input string
      */
     const countryClickHandler = (country: string) => {
-        history.push({ pathname: '/corona-statics.github.io/detail', search: `?query=${country}` });
+        history.push({ pathname: '/detail', search: `?query=${country}` });
     }
 
     return (<div className="list-view">

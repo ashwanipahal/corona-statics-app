@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "CoronaStatics App",
   "main": "index.js",
-  "homepage": "http://ashwanipahal.github.io/corona-statics-app",
+  "homepage": "https://ashwanipahal.github.io/corona-statics.github.io/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --config webpack.dev.js",
-    "prod-build": "webpack --config webpack.prod.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "prod-build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",

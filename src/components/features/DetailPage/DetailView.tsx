@@ -36,9 +36,7 @@ const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: D
     }, [data])
     let history = createBrowserHistory();
     const backToHomePage = () => {
-        if (window.location.pathname !== '/') {
             history.goBack();
-        }
     }
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
