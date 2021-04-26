@@ -19,12 +19,15 @@ type item = {
     Recovered: number;
 }
 
+/**
+ * Returns a URLSearchParams object instance
+ */
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 const DetailView = ({ getDetailData, countryListData = [], countryData = [] }: DetailProps) => {
-    
+
     let query = useQuery();
     let data = query.get('query');
     React.useEffect(() => {

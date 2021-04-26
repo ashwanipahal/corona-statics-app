@@ -20,7 +20,6 @@ type item = {
 }
 
 const ListView = ({ getListData, listData = [], globalData }: ListProps) => {
-
     React.useEffect(() => {
         // Making call every time because we want real time data
         getListData()
