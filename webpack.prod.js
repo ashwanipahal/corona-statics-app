@@ -7,7 +7,8 @@ module.exports = merge(common, {
     mode: 'production',
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "public")
+        path: path.resolve(__dirname, "public"),
+        chunkFilename: 'chunk.[name].js',
       },
     devtool: 'source-map',
     optimization: {
